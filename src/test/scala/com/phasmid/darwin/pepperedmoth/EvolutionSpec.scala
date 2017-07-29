@@ -21,7 +21,7 @@
  *      along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.phasmid.pepperedmoth
+package com.phasmid.darwin.pepperedmoth
 
 import com.phasmid.darwin.eco._
 import com.phasmid.darwin.genetics._

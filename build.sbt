@@ -8,6 +8,10 @@ scalaVersion := "2.11.8"
 
 val scalaTestVersion = "2.2.4"
 
+// includeFilter in (Compile, unmanagedSources) := "*.scala"
+
+ excludeFilter in (Compile, unmanagedSources) := HiddenFileFilter || "*.java"
+
 libraryDependencies ++= Seq(
   "com.phasmid" %% "darwin" % "1.0.0-SNAPSHOT",
   "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
