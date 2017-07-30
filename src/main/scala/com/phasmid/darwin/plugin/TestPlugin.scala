@@ -1,6 +1,6 @@
 package com.phasmid.darwin.plugin
 
-import java.time.LocalDateTime
+import java.time.{Duration, LocalDateTime}
 
 import scala.collection.mutable
 
@@ -16,12 +16,16 @@ case class TestPlugin() extends AbstractPlugin("Test plugin", "1.0") with Evolva
 
   protected def doDestroy: Unit = println(s"$name destroyed")
 
-  def onTick(time: LocalDateTime): Unit = {
-    println(s"$name received tick at $time")
-    for (l <- listeners) l.receive(this, time)
-  }
-
   def addListener(x: Listener): Unit = listeners += x
 
   val listeners: mutable.MutableList[Listener] = mutable.MutableList[Listener]()
+
+  def actionDuration: Duration = Duration.ofSeconds(1L)
+
+  def act(generation: Long): Unit = {
+    println(s"$name received tick #$generation")
+    for (l <- listeners) l.receive(this, s"generation $generation at ${LocalDateTime.now()}")
+  }
+
+  override def toString: String = s"'$name' version $version"
 }
