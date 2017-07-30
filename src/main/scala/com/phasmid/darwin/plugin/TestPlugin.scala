@@ -7,7 +7,7 @@ import scala.collection.mutable
 /**
   * Created by scalaprof on 7/28/17.
   */
-class TestPlugin extends AbstractPlugin("Test plugin", "1.0") with EvolvablePlugin {
+case class TestPlugin() extends AbstractPlugin("Test plugin", "1.0") with EvolvablePlugin {
   protected def doInit: Unit = println(s"$name initialized")
 
   protected def doStart: Unit = println(s"$name started")
@@ -18,7 +18,7 @@ class TestPlugin extends AbstractPlugin("Test plugin", "1.0") with EvolvablePlug
 
   def onTick(time: LocalDateTime): Unit = {
     println(s"$name received tick at $time")
-    for (l <- listeners) l.receive(this)
+    for (l <- listeners) l.receive(this, time)
   }
 
   def addListener(x: Listener): Unit = listeners += x
